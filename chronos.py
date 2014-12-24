@@ -2,19 +2,18 @@
 Chronos
 
 Notes:
-* Add *.chronos to your .gitignore
 * Chronos only provides AES256 encryption for values
 * Chronos only provides obfuscation for keys
 * SimpleCrypt requires python-dev
 """
+
+from getpass import getuser
 from os import path
 from simplecrypt import encrypt, decrypt
 import pickle
-from getpass import getuser
 
 DBNAME = "db.chronos"
 
-# TODO: Store md5sum with value to maintain data integrity
 class Chronos():
 
     def __init__(self, passFile=None):
