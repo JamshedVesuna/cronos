@@ -1,16 +1,16 @@
-"""
-Chronos
+#!/usr/bin/env python
+"""Chronos - Python module for safely and cleanly using sensitive data in code
+
+__author__ = "Jamshed Vesuna"
 
 Notes:
-* Chronos only provides AES256 encryption for values
-* Chronos only provides obfuscation for keys
 * SimpleCrypt requires python-dev
 """
-
 from getpass import getuser
 from os import path
-from simplecrypt import encrypt, decrypt
+
 import pickle
+from simplecrypt import encrypt, decrypt
 
 DBNAME = "db.chronos"
 
@@ -31,8 +31,6 @@ class Chronos():
                     self.encryptKey = self.keyFileCipher(f.read())
             except IOError:
                 raise IOError('Please provide a valid password file')
-            if self.encryptKey == '':
-                raise KeyError('Encryption key must not be empty')
             self.chronosDict[self.shift(DBNAME)] = self.shift(passFile)
             pickle.dump(self.chronosDict, open(DBNAME, 'wb'))
 
