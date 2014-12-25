@@ -5,6 +5,10 @@ Python module for safely and cleanly using sensitive data in shared code.
 
 Cronos uses a secure encryption method, [AES256](http://en.wikipedia.org/wiki/Advanced_Encryption_Standard), to store passwords and sensitive values locally. Simple (and unsecure) [Caesar Ciphers](http://en.wikipedia.org/wiki/Caesar_cipher) are used to create obfuscated keys in the cronos datastore. This means keys are simply human-unreadable and values are securely encrypted with a password file (defaults to your ssh public key).
 
+Install
+-------
+* Python Pip: `pip install cronos`
+
 Usage
 -----
 While global keys are stored in your code (such as the plaintext `API_KEY` in the examples below), Cronos uses the single interface `get` to *initially* prompt the user for the value at runtime. Cronos stores the encrypted value in a keystore called `db.cronos`. Upon a second call to `get`, Cronos performs a lookup and decryption.
