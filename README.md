@@ -16,14 +16,14 @@ While global keys are stored in your code (such as the plaintext `API_KEY` in th
 You may want to add `*.cronos` to your `.gitignore`.
 
 Using `mypassword.txt` as the encryption key:
-```
+```python
 from cronos import Cronos
 c = Cronos('mypassword.txt')
 myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
 ```
 
 Using `id_rsa.pub` as the default encryption key:
-```
+```python
 from cronos import Cronos
 c = Cronos()
 myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
