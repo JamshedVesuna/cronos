@@ -18,7 +18,7 @@ class Cronos():
 
     def __init__(self, passFile=None):
         if passFile is None:
-            passFile = '/home/{0}/.ssh/id_rsa.pub'.format(getuser())
+            passFile = '/home/{0}/.ssh/id_rsa'.format(getuser())
         if path.isfile(DBNAME):
             self.cronosDict = pickle.load(open(DBNAME, 'rb'))
             with open(self.deshift(self.cronosDict[self.shift(DBNAME)])) as f:
