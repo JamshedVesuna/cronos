@@ -17,14 +17,14 @@ You may want to add `*.cronos` to your `.gitignore`.
 
 Using `mypassword.txt` as the encryption key:
 ```python
-from cronos import Cronos
+from cronos import cronos
 c = cronos.Cronos('mypassword.txt')
 myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
 ```
 
 Using `id_rsa.pub` as the default encryption key:
 ```python
-from cronos import Cronos
+from cronos import cronos
 c = cronos.Cronos()
 myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
 ```
