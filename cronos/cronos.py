@@ -8,6 +8,7 @@ Notes:
 """
 from getpass import getuser
 from os import path
+from sys import platform
 
 import pickle
 from simplecrypt import encrypt, decrypt
@@ -18,7 +19,11 @@ class Cronos():
 
     def __init__(self, passFile=None):
         if passFile is None:
-            passFile = '/home/{0}/.ssh/id_rsa'.format(getuser())
+            osType = self.get_osType()
+            if osType == 'osx':
+                passFile = '/Users/{0}/.ssh/id_rsa'.format(getuser())
+            else:
+                passFile = '/home/{0}/.ssh/id_rsa'.format(getuser())
         if path.isfile(DBNAME):
             self.cronosDict = pickle.load(open(DBNAME, 'rb'))
             with open(self.deshift(self.cronosDict[self.shift(DBNAME)])) as f:
@@ -64,3 +69,9 @@ class Cronos():
         for i in key:
             cipher += chr(ord(i) - 100)
         return cipher
+
+    def get_osType(self):
+        if 'linux' in platform:
+            return 'linux'
+        elif 'darwin' in platform:
+            return 'osx'
