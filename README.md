@@ -7,6 +7,8 @@ Cronos uses a secure encryption method, [AES256](http://en.wikipedia.org/wiki/Ad
 
 Install
 -------
+Supports Linux and OS X.
+
 * Python Pip: `pip install cronos`
 
 Usage
@@ -35,3 +37,4 @@ Requirements
 * [os](https://docs.python.org/2/library/os.html)
 * [pickle](https://docs.python.org/2/library/pickle.htmlpassword)
 * [simplecrypt](https://pypi.python.org/pypi/simple-crypt)
+* [sys](https://docs.python.org/2/library/sys.html)
