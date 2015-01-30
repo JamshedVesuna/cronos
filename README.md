@@ -24,7 +24,7 @@ c = cronos.Cronos('mypassword.txt')
 myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
 ```
 
-Using `id_rsa.pub` as the default encryption key:
+Using your ssh private key (`id_rsa`) as the default encryption key:
 ```python
 from cronos import cronos
 c = cronos.Cronos()
