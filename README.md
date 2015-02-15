@@ -17,17 +17,17 @@ While global keys are stored in your code (such as the plaintext `API_KEY` in th
 
 You may want to add `*.cronos` to your `.gitignore`.
 
-Using `mypassword.txt` as the encryption key:
-```python
-from cronos import cronos
-c = cronos.Cronos('mypassword.txt')
-myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
-```
-
 Using your ssh private key (`id_rsa`) as the default encryption key:
 ```python
 from cronos import cronos
 c = cronos.Cronos()
+myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
+```
+
+Using `mypassword.txt` as the encryption key:
+```python
+from cronos import cronos
+c = cronos.Cronos('mypassword.txt')
 myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
 ```
 

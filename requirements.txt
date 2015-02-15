@@ -1,0 +1,2 @@
+cronos==0.0.4
+simple-crypt==4.0.0
