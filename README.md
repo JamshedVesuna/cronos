@@ -24,10 +24,10 @@ c = cronos.Cronos()
 myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
 ```
 
-Using `mypassword.txt` as the encryption key:
+Using `mypassword.txt` as the encryption key and `/tmp/db.chronos` as the db file:
 ```python
 from cronos import cronos
-c = cronos.Cronos('mypassword.txt')
+c = cronos.Cronos(passFile='mypassword.txt', storeFile='/tmp/db.chronos')
 myKey = c.get("API_KEY")  # Prompt user for API_KEY if not already stored
 ```
 
