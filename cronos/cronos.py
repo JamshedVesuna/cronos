@@ -15,18 +15,23 @@ from simplecrypt import encrypt, decrypt
 
 DBNAME = "db.cronos"
 
-class Cronos():
 
-    def __init__(self, passFile=None):
+class Cronos():
+    def __init__(self, passFile=None, storeFile=None):
         if passFile is None:
             osType = self.get_osType()
             if osType == 'osx':
                 passFile = '/Users/{0}/.ssh/id_rsa'.format(getuser())
             else:
                 passFile = '/home/{0}/.ssh/id_rsa'.format(getuser())
-        if path.isfile(DBNAME):
-            self.cronosDict = pickle.load(open(DBNAME, 'rb'))
-            with open(self.deshift(self.cronosDict[self.shift(DBNAME)])) as f:
+        if storeFile is None:
+            self.dbname = DBNAME
+        else:
+            self.dbname = storeFile
+        if path.isfile(self.dbname):
+            self.cronosDict = pickle.load(open(self.dbname, 'rb'))
+            with open(self.deshift(
+                    self.cronosDict[self.shift(self.dbname)])) as f:
                 self.encryptKey = self.keyFileCipher(f.read())
         else:
             self.cronosDict = {}
@@ -35,15 +40,16 @@ class Cronos():
                 with open(passFile) as f:
                     self.encryptKey = self.keyFileCipher(f.read())
             except IOError:
-                raise IOError('Please provide a valid password file')
-            self.cronosDict[self.shift(DBNAME)] = self.shift(passFile)
-            pickle.dump(self.cronosDict, open(DBNAME, 'wb'))
+                raise IOError('Please provide a valid password file.')
+            self.cronosDict[self.shift(self.dbname)] = self.shift(passFile)
+            pickle.dump(self.cronosDict, open(self.dbname, 'wb'))
 
     def get(self, key):
-        assert type(key) == str, 'Cronos key must be of type string'
+        assert type(key) in (str, unicode), (
+            'Cronos key must be of type string.')
         try:
             return decrypt(self.encryptKey, self.cronosDict[self.shift(key)])
-        except KeyError as e:
+        except KeyError:
             self.setVal(key)
             return decrypt(self.encryptKey, self.cronosDict[self.shift(key)])
 
@@ -53,7 +59,7 @@ class Cronos():
         print('Using value={0}'.format(userVal))
         cipherVal = encrypt(self.encryptKey, userVal)
         self.cronosDict[self.shift(key)] = cipherVal
-        pickle.dump(self.cronosDict, open(DBNAME, 'wb'))
+        pickle.dump(self.cronosDict, open(self.dbname, 'wb'))
 
     def keyFileCipher(self, key):
         return key[0::2][::-1]
